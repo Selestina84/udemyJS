@@ -30,9 +30,25 @@ function chooseExpensive(){
 };
 chooseExpensive();
 
-appData.moneyPerDay = (appData.budget/30).toFixed();
+function chooseOptExpenses() {
+    for (let i=1; i<3; i++){
+        let c = prompt('Статья необязательных расходов?');
+        if((typeof(c)) === 'string' && (typeof(c)) != null && c != '' && c.length < 50){
+            appData.expenses[i] = c; 
+        } else {
+           i = i-1;
+        };
+    }
+};
+chooseOptExpenses();
+ 
+function detectDayBudget(){
+    appData.moneyPerDay = (appData.budget/30).toFixed();
+    alert(`Ежедневный бюджет  ${appData.moneyPerDay}`);
+};
+detectDayBudget();
 
-alert(`Ежедневный бюджет  ${appData.moneyPerDay}`);
+function detectLevel() {
     if (appData.moneyPerDay < 100) {
         alert('Минимальный уровень достатка');
     } else if(appData.moneyPerDay >= 100 && appData.moneyPerDay < 1000){
@@ -40,13 +56,17 @@ alert(`Ежедневный бюджет  ${appData.moneyPerDay}`);
     } else if(appData.moneyPerDay > 1000){
         alert('Высокий уровень уровень достатка');
     } else { alert('Ошибка, переданы неверные данные')};
+};
+detectLevel();
+    
 
 function checkSavings() {
     if(appData.savings == true){
         let save = +prompt('Какова сумма Ваших накоплений?'),
-            percent = +prompt('КАков процент в месяц?');
+            percent = +prompt('Каков процент в месяц?');
          appData.savings = (save/100/12*percent).toFixed();  
          alert(`Доход с Ваших накоплений составляет ${appData.savings}`);
     };
 };
 checkSavings();
+
